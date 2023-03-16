@@ -4,7 +4,7 @@ from activities import deal_cards, evaluate_hand
 
 class PokerWorkflowWorker:
     def __init__(self):
-        self.client = WorkflowClient.new_client(namespace='default')
+        self.client = Client.new_client(namespace='default')
 
     def run(self):
         worker = self.client.new_worker(
