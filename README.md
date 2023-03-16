@@ -18,12 +18,6 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [ ] add a unit test
 - [ ] write v2.0 blog post
 
-### Feature Requests Roadmap
-- multiplayer
-- bet / money transfer / winning / cashing out
-- leaderboard
-- tx holdem rules / pre-flop / flop / turn / river
-
 ### How to Play
 ~~~
 > python3 main.py
