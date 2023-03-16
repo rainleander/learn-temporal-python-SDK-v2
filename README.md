@@ -6,14 +6,14 @@ This code defines a `PlayGameActivity` class that wraps the `play_game()` functi
 Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-pythonSDK)
 
 ## AppDev Process
+- [x] deck
+- [x] shuffle
+- [x] deal
+- [x] score
+- [x] multiple player game 
 - [ ] split out application into temporal specific functions: worker, workflow, activity [in progress]
-- [ ] deck
-- [ ] shuffle
-- [ ] deal
-- [ ] score
-- [ ] single player game 
-- [ ] [workflow](https://docs.temporal.io/application-development/foundations) 
-- [ ] [activities](https://docs.temporal.io/application-development/features) 
+- [x] [workflow](https://docs.temporal.io/application-development/foundations) 
+- [x] [activities](https://docs.temporal.io/application-development/features) 
 - [ ] [child workflows](https://docs.temporal.io/workflows#child-workflow)
 - [ ] [signals](https://docs.temporal.io/concepts/what-is-a-signal/)
 - [ ] [queries](https://docs.temporal.io/concepts/what-is-a-query/) 
