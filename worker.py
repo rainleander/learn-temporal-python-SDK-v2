@@ -1,4 +1,4 @@
-from temporalio.workflow import Client
+from temporalio.client import Client
 from workflow import PokerWorkflow, PokerWorkflowQueries, PokerWorkflowSignals
 from activities import deal_cards, evaluate_hand
 
