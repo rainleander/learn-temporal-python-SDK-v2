@@ -1,6 +1,8 @@
 # WIP Learn Temporal Python SDK v2
 This project is intended to show my process through learning Temporal and is not meant to showcase production-level best practices.
 
+This code defines a `PlayGameActivity` class that wraps the `play_game()` function and executes it as an activity using temporalio. The `workflow()` function is an asynchronous function that defines the workflow steps. It first creates a new `WorkflowClient`, then creates a `PlayGameActivity` instance using the client, and executes the `play_game()` method asynchronously as an activity. The winner is returned as the result of the activity. Finally, the workflow completes and the winner is printed to the console.
+
 Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-pythonSDK)
 
 ## AppDev Process
