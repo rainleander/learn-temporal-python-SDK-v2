@@ -44,7 +44,7 @@ source env/bin/activate
 ```
 python -m pip install -U pip
 ```
-5. Install Temporal SDK: 
+5. Install Temporal Python SDK and Pytest: 
 ```
 python -m pip install temporalio pytest
 ```
