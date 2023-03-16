@@ -3,10 +3,6 @@ This project is intended to show my process through learning Temporal and is not
 
 Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-pythonSDK)
 
-![](https://github.com/rainleander/learn-temporal-pythonSDK/blob/main/Studio_Project.gif)
-
-![](https://github.com/rainleander/learn-temporal-pythonSDK/blob/main/Poker_Screen_Caps%20(3).gif)
-
 ## AppDev Process
 - [x] deck
 - [x] shuffle
@@ -15,7 +11,6 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [x] single player game 
 - [x] [workflow](https://docs.temporal.io/application-development/foundations) 
 - [x] [activities](https://docs.temporal.io/application-development/features) 
-- [x] write v1.0 [blog post](https://temporal.io/blog/python-sdk-your-first-application)
 - [ ] split out application into temporal specific functions: worker, workflow, activity [in progress]
 - [ ] [child workflows](https://docs.temporal.io/workflows#child-workflow) [in progress]
 - [ ] [signals](https://docs.temporal.io/concepts/what-is-a-signal/) [in progress]
