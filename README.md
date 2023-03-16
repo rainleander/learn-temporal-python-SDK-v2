@@ -11,7 +11,7 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [x] deal
 - [x] score
 - [x] multiple player game 
-- [ ] split out application into temporal specific functions: worker, workflow, activity [in progress]
+- [x] split out application into temporal specific functions: worker, workflow, activity [in progress]
 - [x] [workflow](https://docs.temporal.io/application-development/foundations) 
 - [x] [activities](https://docs.temporal.io/application-development/features) 
 - [ ] [child workflows](https://docs.temporal.io/workflows#child-workflow)
