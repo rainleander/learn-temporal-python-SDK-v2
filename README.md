@@ -4,14 +4,14 @@ This project is intended to show my process through learning Temporal and is not
 Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-pythonSDK)
 
 ## AppDev Process
-- [x] deck
-- [x] shuffle
-- [x] deal
-- [x] score
-- [x] single player game 
-- [x] [workflow](https://docs.temporal.io/application-development/foundations) 
-- [x] [activities](https://docs.temporal.io/application-development/features) 
 - [ ] split out application into temporal specific functions: worker, workflow, activity [in progress]
+- [ ] deck
+- [ ] shuffle
+- [ ] deal
+- [ ] score
+- [ ] single player game 
+- [ ] [workflow](https://docs.temporal.io/application-development/foundations) 
+- [ ] [activities](https://docs.temporal.io/application-development/features) 
 - [ ] [child workflows](https://docs.temporal.io/workflows#child-workflow) [in progress]
 - [ ] [signals](https://docs.temporal.io/concepts/what-is-a-signal/) [in progress]
 - [ ] [queries](https://docs.temporal.io/concepts/what-is-a-query/) [in progress]
