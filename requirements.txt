@@ -1,2 +1,2 @@
-temporal-sdk==1.10.0
-pytest==6.2.5
+temporalite==1.17.3
+pytest==7.2.2
