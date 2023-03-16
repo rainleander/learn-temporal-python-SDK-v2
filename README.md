@@ -23,19 +23,19 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 2. Download main.py from this repository.
 3. Open two terminals and navigate to the directory where main.py is located.
 4. In one terminal, start the Temporal server by running the following command:
-'''
+```
 tctl -n <namespace> namespace register
+```
 Replace <namespace> with a unique namespace identifier, such as your username.
-'''
 5. In the same terminal, start the Temporal worker by running the following command:
-'''
+```
 temporal worker --task-queue poker_game
-'''
+```
 This will start a worker that listens on the poker_game task queue, waiting for tasks to execute.
 6. In the other terminal, run the poker.py file by running the following command:
-'''
+```
 python3 main.py
-'''
+```
 This will start the workflow by calling the workflow() function.
 7. Wait for the workflow to complete. You should see output in both terminals indicating that the workflow is running and that the activity has been executed.
 8. Once the workflow completes, the winner will be printed to the console.
