@@ -19,7 +19,7 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [ ] write v2.0 blog post
 
 ## Run This Program
-1. First, install the 'temporalio' library by running 'pip install temporalio' in your terminal.
+1. First, install the `temporalio` library by running `pip install temporalio` in your terminal.
 2. Download main.py from this repository.
 3. Open two terminals and navigate to the directory where main.py is located.
 4. In one terminal, start the Temporal server by running the following command:
