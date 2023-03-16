@@ -40,24 +40,31 @@ cd learn-temporal-python-SDK-v2/
 python3 -m venv env
 source env/bin/activate
 ```
-4. Install the required packages:
+4. Update pip: 
 ```
-pip install -r requirements.txt
+python -m pip install -U pip
 ```
-5. Start the Temporal server using Docker Compose:
+5. Install Temporal SDK: 
 ```
-docker-compose up
+python -m pip install temporalio pytest
 ```
-6. In a new terminal window, activate the virtual environment again (if necessary) and start the worker:
+6. Confirm the Docker daemon is running, clone the docker-compose files, and start the Temporal server using Docker Compose, as needed:
+```
+docker version
+git clone https://github.com/temporalio/docker-compose.git
+cd docker-compose
+docker compose up
+```
+7. In a new terminal window, activate the virtual environment again (if necessary) and start the worker:
 ```
 source env/bin/activate
 python worker.py
 ```
-7. In a new terminal window, activate the virtual environment again (if necessary) and start the Workflow:
+8. In a new terminal window, activate the virtual environment again (if necessary) and start the Workflow:
 ```
 source env/bin/activate
 python workflow.py
 ```
-8. Follow the prompts to play the game in the terminal.
+9. Follow the prompts to play the game in the terminal.
 
 Note: if you want to run the test suite, you can do so by running the command `pytest` in the root directory of the project.
