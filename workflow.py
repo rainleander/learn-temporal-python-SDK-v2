@@ -1,10 +1,10 @@
 from typing import List
 
-from temporal.workflow import workflow_method, WorkflowClient, Workflow
-from temporal.activity_method import activity_method
-from temporal.exceptions import WorkflowExecutionAlreadyStartedError
-from temporal.query import QueryMethod
-from temporal.signal_method import signal_method
+from temporalio.workflow import workflow_method, WorkflowClient, Workflow
+from temporalio.activity_method import activity_method
+from temporalio.exceptions import WorkflowExecutionAlreadyStartedError
+from temporalio.query import QueryMethod
+from temporalio.signal_method import signal_method
 
 from activities import deal_cards, evaluate_hand
 from child_workflow import determine_winner
