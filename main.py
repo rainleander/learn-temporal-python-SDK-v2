@@ -119,7 +119,7 @@ def check_hand(hand):
     for suit in suits:
         if suits.count(suit) >= 5:
             suit_cards = [card for card in hand if card.suit == suit]
-            for i in range(len(suit))
+            for i in range(len(suit)):
             values = sorted([card.value for card in suit_cards])
             if values == [10, 11, 12, 13, 14]:
                 score = 9
