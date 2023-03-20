@@ -210,7 +210,7 @@ def determine_winner(players):
                 return winners[0].name
         return "Tie"
 
-async def play_game():
+async def main():
     num_players = 5
     deck = Deck()
     deck.shuffle()
@@ -225,3 +225,7 @@ async def play_game():
         print(f"{player.name}'s hand: {player.hand}")
     winner = determine_winner(players)
     print(f"{winner} wins!")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+    
