@@ -1,5 +1,5 @@
 import asyncio
-from temporal.workflow import workflow_method, WorkflowClient, Workflow
+from temporalio import workflow
 
 class Card:
     def __init__(self, value, suit):
@@ -37,15 +37,16 @@ class Deck:
     def deal(self):
         return self.cards.pop()
 
+@workflow.defn
 class PokerWorkflow:
-    @workflow_method
+    @workflow.run
     async def play_poker(cls, num_players, starting_chips):
         async def take_turn(player):
             if player.folded:
                 return
-            bet = await Workflow.await_input()
+            bet = await workflow.await_input()
             while bet != 0 and bet < current_bet:
-                bet = await Workflow.await_input()
+                bet = await workflow.await_input()
             if bet == 0:
                 player.folded = True
             else:
@@ -113,27 +114,6 @@ def check_hand(hand):
     suits = [card.suit for card in hand]
     score = 0
     high_cards = []
-
-    # Check for a straight flush
-    straight_flush = False
-    for suit in suits:
-        if suits.count(suit) >= 5:
-            suit_cards = [card for card in hand if card.suit == suit]
-            for i in range(len(suit)):
-            values = sorted([card.value for card in suit_cards])
-            if values == [10, 11, 12, 13, 14]:
-                score = 9
-                high_cards = suit_cards
-                straight_flush = True
-                break
-            for i in range(len(values) - 4):
-                if values[i+4] == values[i] + 4:
-                    score = 9
-                    high_cards = suit_cards[i:i+5]
-                    straight_flush = True
-                    break
-        if straight_flush:
-            return score, high_cards
 
     # Check for four of a kind
     for value in set(values):
@@ -231,7 +211,7 @@ def determine_winner(players):
         return "Tie"
 
 async def play_game():
-    num_players = 2
+    num_players = 5
     deck = Deck()
     deck.shuffle()
     players = []
