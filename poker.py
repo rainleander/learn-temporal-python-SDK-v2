@@ -44,10 +44,12 @@ async def shuffle_deck(deck: List[Card]) -> List[Card]:
     random.shuffle(deck)
     return deck
 
-async def deal_cards(game_state: GameState, n: int) -> None:
-    for _ in range(n):
-        for player in game_state.players:
-            player.append(game_state.deck.pop())
+async def deal_cards(game_state: GameState, num_cards: int) -> List[Card]:
+    new_cards = []
+    for _ in range(num_cards):
+        card = game_state.deck.pop()
+        new_cards.append(card)
+    return new_cards
 
 def create_deck() -> List[Card]:
     return [Card(suit, rank) for suit in Suit for rank in Rank]
@@ -83,12 +85,15 @@ async def draw_cards(game_state: GameState, player_idx: int, discard_indices: Li
     player_hand = game_state.players[player_idx]
     for index in sorted(discard_indices, reverse=True):
         del player_hand[index]
-    await deal_cards(game_state, len(discard_indices))
+    new_cards = await deal_cards(game_state, len(discard_indices))
+    game_state.players[player_idx] = player_hand + new_cards
 
 async def play_game(num_players: int) -> None:
     deck = await shuffle_deck(create_deck())
     game_state = GameState(deck=deck, players=[[] for _ in range(num_players)])
-    await deal_cards(game_state, 5)
+    
+    for i in range(num_players):
+        game_state.players[i] = await deal_cards(game_state, 5)
 
     for i, player_hand in enumerate(game_state.players):
         print(f"Player {i + 1}'s hand: {', '.join(str(card) for card in player_hand)}")
@@ -112,4 +117,3 @@ if __name__ == "__main__":
         print("Invalid number of players. Must be between 2 and 4.")
     else:
         asyncio.run(play_game(num_players))
-        
