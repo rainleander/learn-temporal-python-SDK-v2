@@ -17,14 +17,14 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [x] deal
 - [x] score
 - [x] multiple player game 
-- [x] split out application into temporal specific functions: worker, workflow, activity 
-- [x] [workflow](https://docs.temporal.io/application-development/foundations) 
-- [x] [activities](https://docs.temporal.io/application-development/features) 
-- [x] [child workflows](https://docs.temporal.io/workflows#child-workflow)
-- [x] [signals](https://docs.temporal.io/concepts/what-is-a-signal/)
-- [x] [queries](https://docs.temporal.io/concepts/what-is-a-query/) 
-- [x] add a unit test
-- [x] write v2.0 blog post
+- [ ] split out application into temporal specific functions: worker, workflow, activity 
+- [ ] [workflow](https://docs.temporal.io/application-development/foundations) 
+- [ ] [activities](https://docs.temporal.io/application-development/features) 
+- [ ] [child workflows](https://docs.temporal.io/workflows#child-workflow)
+- [ ] [signals](https://docs.temporal.io/concepts/what-is-a-signal/)
+- [ ] [queries](https://docs.temporal.io/concepts/what-is-a-query/) 
+- [ ] add a unit test
+- [ ] write v2.0 blog post
 
 ## Run the App Locally
 1. Clone the repository to your local machine:
@@ -40,31 +40,8 @@ cd learn-temporal-python-SDK-v2/
 python3 -m venv env
 source env/bin/activate
 ```
-4. Update pip: 
+4. Run the file locally: 
 ```
-python -m pip install -U pip
+python poker.py
 ```
-5. Install Temporal Python SDK and Pytest: 
-```
-python -m pip install temporalio pytest
-```
-6. Confirm the Docker daemon is running, clone the docker-compose files, and start the Temporal server using Docker Compose, as needed:
-```
-docker version
-git clone https://github.com/temporalio/docker-compose.git
-cd docker-compose
-docker compose up
-```
-7. In a new terminal window, activate the virtual environment again (if necessary) and start the worker:
-```
-source env/bin/activate
-python worker.py
-```
-8. In a new terminal window, activate the virtual environment again (if necessary) and start the Workflow:
-```
-source env/bin/activate
-python workflow.py
-```
-9. Follow the prompts to play the game in the terminal.
-
-Note: if you want to run the test suite, you can do so by running the command `pytest` in the root directory of the project.
+5. Follow the prompts to play the game in the terminal.
