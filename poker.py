@@ -145,12 +145,12 @@ async def main():
     async with Worker(
             client,
             task_queue="poker-activity-task-queue",
-            workflows=[PlayGame()],
+            workflows=[PlayGame],
             activities=[shuffle_deck],
     ):
         result = await client.execute_workflow(
             PlayGame.run,
-            id="poker-workflow-id",
+            id="poker-v2-workflow-id",
             task_queue="poker-task-queue",
         )
 
