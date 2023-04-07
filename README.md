@@ -50,3 +50,11 @@ source env/bin/activate
 python3 poker.py
 ```
 The application should now run and display the hands dealt to each of the four players, and eventually, the winner of the game.
+```
+% python3 poker.py
+Player 1's hand: Four♠, Six♣, J♦, K♠, K♥
+Player 2's hand: Eight♣, Two♦, Two♥, Ten♣, K♣
+Player 3's hand: Three♠, Six♦, Five♠, Nine♦, Q♦
+Player 4's hand: Six♠, J♣, Ten♠, A♠, Seven♣
+Player 1 wins with a Four♠, Six♣, J♦, K♠, K♥!
+```
