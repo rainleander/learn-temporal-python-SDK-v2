@@ -9,7 +9,6 @@ from temporalio import activity, workflow
 from temporalio.client import Client
 from temporalio.worker import Worker
 
-
 class Suit(Enum):
     SPADES = "♠"
     HEARTS = "♥"
@@ -51,6 +50,9 @@ class GameState:
 @activity.defn
 async def shuffle_deck(deck: List[Card]) -> List[Card]:
     await asyncio.sleep(0.1)
+    return await asyncio.to_thread(shuffle_deck_sync, deck)
+
+def shuffle_deck_sync(deck: List[Card]) -> List[Card]:
     random.shuffle(deck)
     return deck
 
@@ -151,7 +153,7 @@ async def main():
         result = await client.execute_workflow(
             PlayGame.run,
             args=(num_players,),  # Pass the num_players as a list inside the tuple
-            id="poker-v2-workflow-id",
+            id="poker-pycharm-workflow-id",
             task_queue="poker-activity-task-queue",
         )
 
