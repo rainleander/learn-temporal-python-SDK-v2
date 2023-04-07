@@ -42,6 +42,6 @@ source env/bin/activate
 ```
 4. Run the file locally: 
 ```
-python poker.py
+python3 poker.py
 ```
 5. Follow the prompts to play the game in the terminal.
