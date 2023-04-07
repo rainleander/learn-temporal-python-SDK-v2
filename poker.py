@@ -1,5 +1,6 @@
 import asyncio
 import random
+import time
 from collections import Counter
 from dataclasses import dataclass
 from enum import Enum, IntEnum
@@ -8,6 +9,7 @@ from typing import List, Tuple
 from temporalio import activity, workflow
 from temporalio.client import Client
 from temporalio.worker import Worker
+
 
 class Suit(Enum):
     SPADES = "♠"
@@ -48,13 +50,22 @@ class GameState:
 
 
 @activity.defn
-async def shuffle_deck(deck: List[Card]) -> List[Card]:
+async def shuffle_deck(deck: List[Card], seed: int) -> List[Card]:
     await asyncio.sleep(0.1)
-    return await asyncio.to_thread(shuffle_deck_sync, deck)
+    return await shuffle_deck_sync(deck, seed)  # Call shuffle_deck_sync directly
 
-def shuffle_deck_sync(deck: List[Card]) -> List[Card]:
-    random.shuffle(deck)
-    return deck
+
+async def shuffle_deck_sync(deck: List[Card], seed: int) -> List[Card]:
+    await asyncio.sleep(0)  # Add this line to make the function asynchronous
+    rng = random.Random(seed)
+    shuffled_deck = []
+
+    while deck:
+        idx = rng.randint(0, len(deck) - 1)
+        card = deck.pop(idx)
+        shuffled_deck.append(card)
+
+    return shuffled_deck
 
 
 async def deal_cards(game_state: GameState, num_cards: int) -> List[Card]:
@@ -79,13 +90,11 @@ def rank_hand(hand: List[Card]) -> Tuple[int, List[int]]:
     if is_straight and is_flush:
         return (9, ranks) if ranks[-1] != 2 else (9, [5, 4, 3, 2, 1])  # Straight flush (ace-low straight flush)
     if 4 in rank_counts.values():
-        return (8, [r for r in rank_counts if rank_counts[r] == 4] + [r for r in rank_counts if
-                                                                      rank_counts[r] != 4])  # Four of a kind
+        return 8, [r for r in rank_counts if rank_counts[r] == 4] + [r for r in rank_counts if rank_counts[r] != 4]  # Four of a kind
     if 3 in rank_counts.values() and 2 in rank_counts.values():
-        return (7, [r for r in rank_counts if rank_counts[r] == 3] + [r for r in rank_counts if
-                                                                      rank_counts[r] != 3])  # Full house
+        return 7, [r for r in rank_counts if rank_counts[r] == 3] + [r for r in rank_counts if rank_counts[r] != 3]  # Full house
     if is_flush:
-        return (6, ranks)  # Flush
+        return 6, ranks  # Flush
     if is_straight:
         return (5, ranks) if ranks[-1] != 2 else (5, [5, 4, 3, 2, 1])  # Straight (ace-low straight)
     if 3 in rank_counts.values():
@@ -94,10 +103,11 @@ def rank_hand(hand: List[Card]) -> Tuple[int, List[int]]:
     if 2 in rank_counts.values():
         pairs = [r for r in rank_counts if rank_counts[r] == 2]
         if len(pairs) == 2:
-            return (3, sorted(pairs, reverse=True) + [r for r in rank_counts if rank_counts[r] == 1])  # Two pairs
+            return 3, sorted(pairs, reverse=True) + [r for r in rank_counts if rank_counts[r] == 1]  # Two pairs
         else:
-            return (2, pairs + sorted([r for r in rank_counts if rank_counts[r] == 1], reverse=True))  # One pair
-    return (1, ranks)  # High card
+            return 2, pairs + sorted([r for r in rank_counts if rank_counts[r] == 1], reverse=True)  # One pair
+    return 1, ranks  # High card
+
 
 async def draw_cards(game_state: GameState, player_idx: int, discard_indices: List[int]) -> None:
     player_hand = game_state.players[player_idx]
@@ -110,24 +120,15 @@ async def draw_cards(game_state: GameState, player_idx: int, discard_indices: Li
 @workflow.defn
 class PlayGame:
     @workflow.run
-    async def run(self, num_players: int) -> None:
-        deck = await shuffle_deck(create_deck())
-        game_state = GameState(deck=deck, players=[[] for _ in range(num_players)])
+    async def run(self, seed: int) -> None:
+        deck = await shuffle_deck(create_deck(), seed)
+        game_state = GameState(deck=deck, players=[[], [], [], []])
 
-        for i in range(num_players):
+        for i in range(4):
             game_state.players[i] = await deal_cards(game_state, 5)
 
         for i, player_hand in enumerate(game_state.players):
             print(f"Player {i + 1}'s hand: {', '.join(str(card) for card in player_hand)}")
-
-        for i in range(num_players):
-            discard_indices = input(
-                f"Player {i + 1}, enter the indices of the cards to discard (0-4, separated by spaces): ")
-            discard_indices = [int(index) for index in discard_indices.split()]
-            await draw_cards(game_state, i, discard_indices)
-
-        for i, player_hand in enumerate(game_state.players):
-            print(f"Player {i + 1}'s final hand: {', '.join(str(card) for card in player_hand)}")
 
         hand_ranks = [rank_hand(hand) for hand in game_state.players]
         max_rank = max(hand_ranks)
@@ -139,23 +140,21 @@ class PlayGame:
 async def main():
     # Start client
     client = await Client.connect("localhost:7233")
+    seed = int(time.time())
+
     async with Worker(
             client,
             task_queue="poker-activity-task-queue",
             workflows=[PlayGame],
             activities=[shuffle_deck],
     ):
-        num_players = int(input("Enter the number of players (2-4): "))
-        if num_players < 2 or num_players > 4:
-            print("Invalid number of players. Please enter a number between 2 and 4.")
-            return
-
         result = await client.execute_workflow(
             PlayGame.run,
-            args=(num_players,),  # Pass the num_players as a list inside the tuple
+            args=(seed,),  # Pass the seed as a tuple
             id="poker-pycharm-workflow-id",
             task_queue="poker-activity-task-queue",
         )
+
 
 if __name__ == "__main__":
     asyncio.run(main())
