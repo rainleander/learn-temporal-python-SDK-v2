@@ -27,11 +27,15 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [ ] write v2.0 blog post
 
 ## Run the App Locally
-1. Clone the repository to your local machine:
+1. Make sure you have Python 3.7 or later installed on your system. You can check your Python version by running the following command in your terminal:
+```
+python --version
+```
+2. Clone the repository to your local machine:
 ```
 git clone https://github.com/rainleander/learn-temporal-python-SDK-v2.git
 ```
-2. Navigate to the directory where the repository was cloned:
+3. Navigate to the directory where the repository was cloned:
 ```
 cd learn-temporal-python-SDK-v2/
 ```
@@ -40,8 +44,9 @@ cd learn-temporal-python-SDK-v2/
 python3 -m venv env
 source env/bin/activate
 ```
-4. Run the file locally: 
+4. Install Temporal server locally by [following the instructions](https://docs.temporal.io/docs/server/quick-install) in the Temporal documentation. Ensure that the Temporal server is running before proceeding to the next step.
+5. Run the file locally: 
 ```
 python3 poker.py
 ```
-5. Follow the prompts to play the game in the terminal.
+The application should now run and display the hands dealt to each of the four players, and eventually, the winner of the game.
