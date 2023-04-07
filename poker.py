@@ -108,12 +108,7 @@ async def draw_cards(game_state: GameState, player_idx: int, discard_indices: Li
 @workflow.defn
 class PlayGame:
     @workflow.run
-    async def run(self) -> None:
-        num_players = int(input("Enter the number of players (2-4): "))
-        if num_players < 2 or num_players > 4:
-            print("Invalid number of players. Please enter a number between 2 and 4.")
-            return
-
+    async def run(self, num_players: int) -> None:
         deck = await shuffle_deck(create_deck())
         game_state = GameState(deck=deck, players=[[] for _ in range(num_players)])
 
@@ -148,12 +143,17 @@ async def main():
             workflows=[PlayGame],
             activities=[shuffle_deck],
     ):
+        num_players = int(input("Enter the number of players (2-4): "))
+        if num_players < 2 or num_players > 4:
+            print("Invalid number of players. Please enter a number between 2 and 4.")
+            return
+
         result = await client.execute_workflow(
             PlayGame.run,
+            args=(num_players,),  # Pass the num_players as a list inside the tuple
             id="poker-v2-workflow-id",
-            task_queue="poker-task-queue",
+            task_queue="poker-activity-task-queue",
         )
-
 
 if __name__ == "__main__":
     asyncio.run(main())
