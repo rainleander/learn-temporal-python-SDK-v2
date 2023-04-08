@@ -17,9 +17,9 @@ Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn
 - [x] deal
 - [x] score
 - [x] multiple player game 
-- [ ] split out application into temporal specific functions: worker, workflow, activity 
-- [ ] [workflow](https://docs.temporal.io/application-development/foundations) 
-- [ ] [activities](https://docs.temporal.io/application-development/features) 
+- [x] split out application into temporal specific functions: worker, workflow, activity 
+- [x] [workflow](https://docs.temporal.io/application-development/foundations) 
+- [x] [activities](https://docs.temporal.io/application-development/features) 
 - [ ] [child workflows](https://docs.temporal.io/workflows#child-workflow)
 - [ ] [signals](https://docs.temporal.io/concepts/what-is-a-signal/)
 - [ ] [queries](https://docs.temporal.io/concepts/what-is-a-query/) 
@@ -47,11 +47,11 @@ source env/bin/activate
 4. Install Temporal server locally by [following the instructions](https://docs.temporal.io/docs/server/quick-install) in the Temporal documentation. Ensure that the Temporal server is running before proceeding to the next step.
 5. Run the file locally: 
 ```
-python3 poker.py
+python3 main.py
 ```
 The application should now run and display the hands dealt to each of the four players, and eventually, the winner of the game.
 ```
-% python3 poker.py
+% python3 main.py
 Player 1's hand: Four♠, Six♣, J♦, K♠, K♥
 Player 2's hand: Eight♣, Two♦, Two♥, Ten♣, K♣
 Player 3's hand: Three♠, Six♦, Five♠, Nine♦, Q♦
