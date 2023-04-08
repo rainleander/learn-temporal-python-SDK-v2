@@ -2,26 +2,25 @@ import asyncio
 import time
 from temporalio.client import Client
 from temporalio.worker import Worker
-from poker_workflow import PlayGame
-from deck_utils import shuffle_deck
+from poker_workflow import PokerWorkflow
+from hand_ranking_workflow import HandRankingWorkflow
 
 
 async def main():
     # Start client
     client = await Client.connect("localhost:7233")
-    seed = int(time.time())
 
     async with Worker(
-            client,
-            task_queue="poker-activity-task-queue",
-            workflows=[PlayGame],
-            activities=[shuffle_deck],
+        client,
+        task_queue="poker-hand-ranking-task-queue",
+        workflows=[PokerWorkflow, HandRankingWorkflow],
     ):
-        result = await client.execute_workflow(
-            PlayGame.run,
-            args=(seed,),  # Pass the seed as a tuple
-            id="poker-pycharm-workflow-id",
-            task_queue="poker-activity-task-queue",
+        seed = int(time.time())
+        await client.execute_workflow(
+            PokerWorkflow.run,
+            seed,
+            id="poker-hand-ranking-workflow-id",
+            task_queue="poker-hand-ranking-task-queue",
         )
 
 if __name__ == "__main__":
