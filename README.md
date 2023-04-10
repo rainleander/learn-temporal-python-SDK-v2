@@ -10,7 +10,21 @@ O: This was mentioned earlier, can we combine?
 # WIP Learn Temporal Python SDK v2
 This project is intended to show my process through learning Temporal and is not meant to showcase production-level best practices.
 
-The program is a simple implementation of a five card draw poker game using the Temporal Python SDK. It is split into separate files for each component of the program: the main workflow, the shuffle activity, the child workflow for ranking hands, and the worker to execute the activity and workflows.
+The program is a simple implementation of a five card draw poker game using the Temporal Python SDK. The main components of the application are:
+
+`main.py`: Starts the Temporal client, connects to the server, and initializes a worker to execute the `PokerWorkflow` and `HandRankingWorkflow` workflows. It then executes the `PokerWorkflow` with a seed value.
+
+`poker_workflow.py`: Defines the `PokerWorkflow`, which simulates a poker game. It creates and shuffles a deck of cards, deals hands to players, and prints their hands. It then evaluates the hands using the `HandRankingWorkflow` and determines the winner.
+
+`hand_ranking.py`: Contains utility functions to rank poker hands and draw cards.
+
+`hand_ranking_workflow.py`: Defines the `HandRankingWorkflow`, which takes a poker hand as input and returns its rank.
+
+`deck_utils.py`: Contains utility functions to create, shuffle, and deal cards from a deck.
+
+`game_state.py`: Defines a `GameState` class that represents the state of the game, including the deck of cards and player hands.
+
+`card.py`: Defines Card, Suit, and Rank classes, which are used to represent playing cards in the application.
 
 Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-pythonSDK)
 
