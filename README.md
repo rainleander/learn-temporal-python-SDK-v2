@@ -1,8 +1,8 @@
 ## Demo Feedback Guidelines/Requests
-Please give feedback within *5 business days* by 14apr2023 1700 PST*<br>
+Please give feedback within *5 business days* by 14apr2023 1700 PST<br>
 Please use review types:  Grammar or Typo (G), Unclear (U), Technical Accuracy (T), or Other (O)
 
-G: This doesn’t flow, instead, what about this: <br>
+G: This doesn’t flow, instead, what about this:<br>
 U: When I read this I think “xyz”, which is confusing to what you mean, can you help clarify what you meant?<br>
 T: This doesn’t reflect the response we should get, instead we should see “xyz”<br>
 O: This was mentioned earlier, can we combine?
