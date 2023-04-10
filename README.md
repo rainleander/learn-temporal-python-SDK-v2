@@ -8,9 +8,9 @@ T: This doesn’t reflect the response we should get, instead we should see “x
 O: This was mentioned earlier, can we combine?
 
 # WIP Learn Temporal Python SDK v2
-This project is intended to show my process through learning Temporal and is not meant to showcase production-level best practices.
+This project is intended to show my process through learning [Temporal](http://temporal.io/) and is not meant to showcase production-level best practices.
 
-The program is a simple implementation of a five card draw poker game using the Temporal Python SDK. The main components of the application are:
+The program is a simple implementation of a five card draw poker game using the [Temporal Python SDK](https://github.com/temporalio/sdk-python). The main components of the application are:
 
 `main.py`: Starts the Temporal client, connects to the server, and initializes a worker to execute the `PokerWorkflow` and `HandRankingWorkflow` workflows. It then executes the `PokerWorkflow` with a seed value.
 
