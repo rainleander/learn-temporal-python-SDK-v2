@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.egg-info/
+dist/
+build/
+temporal/activity_pb2.py
+temporal/workflow_pb2.py
+temporal/__pycache__/
