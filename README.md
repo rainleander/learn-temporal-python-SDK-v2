@@ -26,7 +26,7 @@ The program is a simple implementation of a five card draw poker game using the 
 
 `card.py`: Defines Card, Suit, and Rank classes, which are used to represent playing cards in the application.
 
-Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-pythonSDK).
+Learn Temporal Python SDK v1 is [over here](https://github.com/rainleander/learn-temporal-python-SDK).
 
 ## AppDev Process
 - [x] deck
