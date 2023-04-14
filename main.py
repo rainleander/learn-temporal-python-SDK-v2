@@ -1,9 +1,11 @@
 import asyncio
 import time
+
 from temporalio.client import Client
 from temporalio.worker import Worker
-from poker_workflow import PokerWorkflow
+
 from hand_ranking_workflow import HandRankingWorkflow
+from poker_workflow import PokerWorkflow
 
 
 async def main():
@@ -22,6 +24,7 @@ async def main():
             id="poker-hand-ranking-workflow-id",
             task_queue="poker-hand-ranking-task-queue",
         )
+
 
 if __name__ == "__main__":
     asyncio.run(main())
