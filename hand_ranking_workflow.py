@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from typing import List
+
 from temporalio import workflow
-from hand_ranking import rank_hand
+
 from card import Card
+from hand_ranking import rank_hand
 
 
 @dataclass
