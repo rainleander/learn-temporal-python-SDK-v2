@@ -1,4 +1,3 @@
-import asyncio
 import random
 from typing import List
 from temporalio import activity
@@ -12,12 +11,6 @@ def create_deck() -> List[Card]:
 
 @activity.defn
 async def shuffle_deck(deck: List[Card], seed: int) -> List[Card]:
-    await asyncio.sleep(0.1)
-    return await shuffle_deck_sync(deck, seed)
-
-
-async def shuffle_deck_sync(deck: List[Card], seed: int) -> List[Card]:
-    await asyncio.sleep(0)
     rng = random.Random(seed)
     shuffled_deck = []
 
