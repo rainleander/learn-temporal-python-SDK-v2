@@ -3,9 +3,11 @@ import time
 
 from temporalio.client import Client
 from temporalio.worker import Worker
+from temporalio import workflow
 
-from hand_ranking_workflow import HandRankingWorkflow
-from poker_workflow import PokerWorkflow
+with workflow.unsafe.imports_passed_through():
+    from hand_ranking_workflow import HandRankingWorkflow
+    from poker_workflow import PokerWorkflow
 
 
 async def main():
