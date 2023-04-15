@@ -1,8 +1,9 @@
 from temporalio import workflow
 
-from deck_utils import create_deck, deal_cards, shuffle_deck
-from game_state import GameState
-from hand_ranking_workflow import HandRankingInput, HandRankingWorkflow
+with workflow.unsafe.imports_passed_through():
+    from deck_utils import create_deck, deal_cards, shuffle_deck
+    from game_state import GameState
+    from hand_ranking_workflow import HandRankingInput, HandRankingWorkflow
 
 
 @workflow.defn
