@@ -1,8 +1,11 @@
 import random
 from typing import List
-from temporalio import activity
-from card import Card, Suit, Rank
-from game_state import GameState
+
+from temporalio import workflow, activity
+
+with workflow.unsafe.imports_passed_through():
+    from card import Card, Suit, Rank
+    from game_state import GameState
 
 
 def create_deck() -> List[Card]:
@@ -12,14 +15,8 @@ def create_deck() -> List[Card]:
 @activity.defn
 async def shuffle_deck(deck: List[Card], seed: int) -> List[Card]:
     rng = random.Random(seed)
-    shuffled_deck = []
-
-    while deck:
-        idx = rng.randint(0, len(deck) - 1)
-        card = deck.pop(idx)
-        shuffled_deck.append(card)
-
-    return shuffled_deck
+    rng.shuffle(deck)  # Using random.shuffle with the provided seed
+    return deck
 
 
 async def deal_cards(game_state: GameState, num_cards: int) -> List[Card]:
