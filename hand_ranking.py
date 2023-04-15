@@ -1,9 +1,12 @@
 from collections import Counter
 from typing import List, Tuple
 
-from card import Card
-from deck_utils import deal_cards
-from game_state import GameState
+from temporalio import workflow
+
+with workflow.unsafe.imports_passed_through():
+    from card import Card
+    from deck_utils import deal_cards
+    from game_state import GameState
 
 
 def rank_hand(hand: List[Card]) -> Tuple[int, List[int]]:
