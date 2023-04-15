@@ -3,8 +3,9 @@ from typing import List
 
 from temporalio import workflow
 
-from card import Card
-from hand_ranking import rank_hand
+with workflow.unsafe.imports_passed_through():
+    from card import Card
+    from hand_ranking import rank_hand
 
 
 @dataclass
