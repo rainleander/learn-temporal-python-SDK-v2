@@ -64,9 +64,18 @@ python3 -m venv env
 source env/bin/activate
 ```
 4. Install Temporal server locally by [following the instructions](https://docs.temporal.io/docs/server/quick-install) in the Temporal documentation. Ensure that the Temporal server is running before proceeding to the next step.
-5. Run the file locally: 
+5. Start the worker: 
 ```
-python3 main.py
+python3 worker.py
+```
+6. Open a second tab/window, navigate to the project directory, if needed, and activate the virtual environment, if needed:
+```
+cd path/to/learn-temporal-python-SDK-v2/
+source env/bin/activate
+```
+7. Run the starter:
+```
+python3 starter.py
 ```
 The application should now run and display the hands dealt to each of the four players, and eventually, the winner of the game.
 ```
