@@ -12,7 +12,9 @@ This project is intended to show my process through learning [Temporal](http://t
 
 The program is a simple implementation of a five card draw poker game using the [Temporal Python SDK](https://github.com/temporalio/sdk-python). The main components of the application are:
 
-`main.py`: Starts the Temporal client, connects to the server, and initializes a worker to execute the `PokerWorkflow` and `HandRankingWorkflow` workflows. It then executes the `PokerWorkflow` with a seed value.
+`starter.py`: Starts the Temporal client, connects to the server, and executes the `PokerWorkflow` with a seed value.
+
+`worker.py`: Initializes a Temporal worker to execute the `PokerWorkflow` and `HandRankingWorkflow` workflows, and connects to the Temporal server. It keeps the worker running for an hour.
 
 `poker_workflow.py`: Defines the `PokerWorkflow`, which simulates a poker game. It creates and shuffles a deck of cards, deals hands to players, and prints their hands. It then evaluates the hands using the `HandRankingWorkflow` and determines the winner.
 
