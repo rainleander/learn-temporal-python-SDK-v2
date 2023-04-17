@@ -20,12 +20,13 @@ async def main():
         workflows=[PokerWorkflow, HandRankingWorkflow],
     ):
         seed = int(time.time())
-        await client.execute_workflow(
+        results = await client.execute_workflow(
             PokerWorkflow.run,
             seed,
             id="poker-hand-ranking-workflow-id",
             task_queue="poker-hand-ranking-task-queue",
         )
+        print(results)
 
 
 if __name__ == "__main__":
