@@ -1,7 +1,10 @@
+from datetime import timedelta
+from typing import Optional
+
 from temporalio import workflow
 
 with workflow.unsafe.imports_passed_through():
-    from deck_utils import create_deck, deal_cards, shuffle_deck
+    from deck_utils import create_and_shuffle_deck, deal_cards
     from game_state import GameState
     from hand_ranking_workflow import HandRankingInput, HandRankingWorkflow
 
@@ -9,17 +12,21 @@ with workflow.unsafe.imports_passed_through():
 @workflow.defn
 class PokerWorkflow:
     @workflow.run
-    async def run(self, seed: int) -> None:
-        deck = await shuffle_deck(create_deck(), seed)
+    async def run(self, seed: int) -> Optional[str]:
+        deck = await workflow.execute_activity(
+            create_and_shuffle_deck,
+            seed,
+            start_to_close_timeout=timedelta(seconds=5)
+        )
+
         game_state = GameState(deck=deck, players=[[], [], [], []])
 
         for i in range(4):
             game_state.players[i] = await deal_cards(game_state, 5)
 
+        player_hands_str = []
         for i, player_hand in enumerate(game_state.players):
-            print(
-                f"Player {i + 1}'s hand: {', '.join(str(card) for card in player_hand)}"
-            )
+            player_hands_str.append(f"Player {i + 1}'s hand: {', '.join(str(card) for card in player_hand)}")
 
         hand_ranks = [
             await workflow.execute_child_workflow(
@@ -37,6 +44,4 @@ class PokerWorkflow:
             winning_hands, key=lambda x: (x[1][0], x[1][1])
         )
 
-        print(
-            f"Player {winner_idx + 1} wins with a {', '.join(str(card) for card in game_state.players[winner_idx])}!"
-        )
+        return '\n'.join(player_hands_str) + f"\nPlayer {winner_idx + 1} wins with a {', '.join(str(card) for card in game_state.players[winner_idx])}!"
