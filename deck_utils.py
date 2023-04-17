@@ -8,14 +8,13 @@ with workflow.unsafe.imports_passed_through():
     from game_state import GameState
 
 
-def create_deck() -> List[Card]:
-    return [Card(suit, rank) for suit in Suit for rank in Rank]
-
-
 @activity.defn
-async def shuffle_deck(deck: List[Card], seed: int) -> List[Card]:
+async def create_and_shuffle_deck(seed: int) -> List[Card]:
+    deck = [Card(suit, rank) for suit in Suit for rank in Rank]
+
     rng = random.Random(seed)
     rng.shuffle(deck)  # Using random.shuffle with the provided seed
+
     return deck
 
 
